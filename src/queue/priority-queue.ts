@@ -1,9 +1,11 @@
 function PriorityQueue() {
   const collection = []
-  this.printCollections = function () {
+  this.printCollections = () => {
     console.log(collection)
   }
-  this.enqueue = function (element) {
+  this.enqueue = enqueue
+
+  function enqueue(element) {
     if (this.isEmpty()) {
       collection.push(element)
     } else {
@@ -21,17 +23,13 @@ function PriorityQueue() {
     }
   }
 
-  this.dequeue = function () {
+  this.dequeue = () => {
     const value = collection.shift()
     return value[0]
   }
-  this.front = function () {
-    return collection[0]
-  }
+  this.front = () => collection[0]
 
-  this.size = function () {
-    return collection.length
-  }
+  this.size = () => collection.length
   this.isEmpty = function () {
     return (collection.length === 0)
   }
