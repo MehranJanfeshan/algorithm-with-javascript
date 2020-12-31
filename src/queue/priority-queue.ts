@@ -8,18 +8,16 @@ function PriorityQueue() {
   function enqueue(element) {
     if (this.isEmpty()) {
       collection.push(element)
-    } else {
-      let added = false
-      for (let i = 0; i < collection.length; i++) {
-        if (element[1] < collection[i][1]) {
-          collection.splice(i, 0, element)
-          added = true
-          break
-        }
+      return
+    }
+    const added = collection.some((item, index) => {
+      if (element[1] < item[1]) {
+        collection.splice(index, 0, element)
+        return item
       }
-      if (!added) {
-        collection.push(element)
-      }
+    })
+    if (!added) {
+      collection.push(element)
     }
   }
 
@@ -30,9 +28,7 @@ function PriorityQueue() {
   this.front = () => collection[0]
 
   this.size = () => collection.length
-  this.isEmpty = function () {
-    return (collection.length === 0)
-  }
+  this.isEmpty = () => (collection.length === 0)
 }
 
 

@@ -2,7 +2,7 @@ function LinkedList() {
   let length = 0
   let head = null
 
-  function nodeFactory(element) {
+  function NodeFactory(element) {
     this.element = element
     this.next = null
   }
@@ -15,16 +15,19 @@ function LinkedList() {
   }
 
   this.add = element => {
-    const node = new nodeFactory(element)
+    const node = new NodeFactory(element)
+
     if (head === null) {
       head = node
-    } else {
-      let currentNode = head
-      while (currentNode.next) {
-        currentNode = currentNode.next
-      }
-      currentNode.next = node
+      length++
+      return
     }
+
+    let currentNode = head
+    while (currentNode.next) {
+      currentNode = currentNode.next
+    }
+    currentNode.next = node
     length++
   }
 
@@ -70,7 +73,7 @@ function LinkedList() {
   }
 
   this.addAt = (index, element) => {
-    const node = new nodeFactory(element)
+    const node = new NodeFactory(element)
     let currentNode = head
     let currentIndex = 0
     let previousNode
