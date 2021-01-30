@@ -1,42 +1,36 @@
-// Left child i * 2
-// Right child i * 2 + 1
-// Parent i/2
+/* Heaps */
 
-const MinHeap = function () {
+// left child: i * 2
+// right child: i * 2 + 1
+// parent: i / 2
 
-  // Heap always starts from index 1
+function MinHeap() {
+
   const heap = [null]
 
-  this.insert = (num) => {
+  this.insert = num => {
     heap.push(num)
     if (heap.length > 2) {
       let idx = heap.length - 1
-      let parent = Math.floor(idx / 2)
-      while (heap[idx] < heap[parent]) {
+      while (heap[idx] < heap[Math.floor(idx / 2)]) {
         if (idx >= 1) {
-          [heap[parent], heap[idx]] = [heap[idx], heap[parent]]
-          if (parent > 1) {
-            idx = parent
-            parent = Math.floor(idx / 2)
-            continue
+          [heap[Math.floor(idx / 2)], heap[idx]] = [heap[idx], heap[Math.floor(idx / 2)]]
+          if (Math.floor(idx / 2) > 1) {
+            idx = Math.floor(idx / 2)
+          } else {
+            break
           }
-          break
+
         }
+
       }
+
     }
+
   }
 
-  this.print = () => {
-    console.log(heap)
-  }
-
-  this.remove = function () {
+  this.remove = () => {
     const smallest = heap[1]
-
-    if (heap.length == 2) {
-      heap.splice(1, 1)
-    }
-
     if (heap.length > 2) {
       heap[1] = heap[heap.length - 1]
       heap.splice(heap.length - 1)
@@ -55,9 +49,11 @@ const MinHeap = function () {
         if (heap[left] < heap[right]) {
           [heap[i], heap[left]] = [heap[left], heap[i]]
           i = 2 * i
+        } else {
+          [heap[i], heap[right]] = [heap[right], heap[i]]
+          i = 2 * i + 1
         }
-        [heap[i], heap[right]] = [heap[right], heap[i]]
-        i = 2 * i + 1
+
         left = 2 * i
         right = 2 * i + 1
         if (heap[left] == undefined || heap[right] == undefined) {
@@ -66,7 +62,12 @@ const MinHeap = function () {
 
       }
 
+    } else if (heap.length == 2) {
+      heap.splice(1, 1)
+    } else {
+      return null
     }
+
     return smallest
   }
 
@@ -75,20 +76,10 @@ const MinHeap = function () {
     while (heap.length > 1) {
       result.push(this.remove())
     }
+
     return result
   }
 
 }
-
-
-const heap = new MinHeap()
-heap.insert(8)
-heap.insert(2)
-heap.insert(9)
-heap.insert(0)
-heap.insert(16)
-heap.insert(20)
-heap.print()
-console.log(heap.sort())
 
 

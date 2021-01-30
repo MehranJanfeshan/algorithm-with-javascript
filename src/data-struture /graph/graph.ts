@@ -39,3 +39,6 @@ const exBFSGraph = [
   [0, 1, 0, 0, 0]
 ]
 console.log(bfs(exBFSGraph, 1))
+
+// expected result
+// { '0': 2, '1': 0, '2': 1, '3': 3, '4': Infinity }

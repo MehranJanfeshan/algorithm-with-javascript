@@ -30,14 +30,14 @@ function HashTable() {
   }
 
   this.remove = (key) => {
-    const index = hash(key, storageLimit)
-    if (storage[index].length === 1 && storage[index][0][0] === key) {
-      delete storage[index]
+    const hashKey = hash(key, storageLimit)
+    if (storage[hashKey].length === 1 && storage[hashKey][0][0] === key) {
+      delete storage[hashKey]
       return
     }
-    storage[index].forEach((item, index) => {
+    storage[hashKey].forEach((item, index) => {
       if (item[0] === key) {
-        delete storage[index][index]
+        delete storage[hashKey][index]
       }
     })
   }
